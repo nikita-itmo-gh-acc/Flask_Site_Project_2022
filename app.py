@@ -98,4 +98,4 @@ def product(product_id):
 if __name__ == "__main__":
     sock_thread = threading.Thread(target=start_websocket_server)
     sock_thread.start()
-    app.run(debug=True, port=5051, use_reloader=False)
+    app.run(debug=True, port=5051, use_reloader=False, host='0.0.0.0')
