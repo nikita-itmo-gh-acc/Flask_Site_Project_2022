@@ -18,12 +18,10 @@ itsdangerous==2.0.1
 Jinja2==3.0.3
 Mako==1.2.0
 MarkupSafe==2.0.1
-npm==0.1.1
 optional-django==0.1.0
 requests==2.27.1
 SQLAlchemy==1.4.31
 urllib3==1.26.9
-vercel==0.2.1
 websockets==10.3
 Werkzeug==2.0.2
 WTForms==3.0.1
