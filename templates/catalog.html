@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Каталог товаров</h1>
+    <div class="catalog-main">
+        <form action="" method="POST" name="search">
+            <p>{{ form.hidden_tag() }}</p>
+            <p> Поиск по названию: {{ form.search }}</p>
+            <p> Поиск по категориям: {{ form.categories }}</p>
+            <p>{{ form.submit }}</p>
+        </form>
+        <ul class="catalog-list">
+        {% for prod in prods %}
+            <li class="catalog-list-elem">
+                <img src="{{prod.img_path}}" height="150" width="150"> <br>
+                Название товара: {{ prod.title }} <br>
+                Цена: {{ prod.price }} <br>
+                Категория товара: {{ prod.category.title }} <br>
+                <a href="/product/{{prod.id}}">подробнее..</a>
+
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+    </div>
+
+{% endblock %}

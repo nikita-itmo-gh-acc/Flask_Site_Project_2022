@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--    <h1> {{prod.id}} </h1>-->
+    <div class="product-page-main">
+        <img src="{{prod.img_path}}" width="300" height="300">
+        <p> Название: {{ prod.title }} </p>
+        <p> Цена: {{ prod.price }} </p>
+        <p> Описание: {{ prod.description }} </p>
+    </div>
+    {% if current_user.is_authenticated %}
+        <div class="product-page-comment">
+            <p>Комментарий<Br>
+                <textarea id="comm" name="comment" cols="40" rows="3"></textarea>
+            </p>
+            <p>
+                <input id="elem" type="button" value="Отправить">
+            </p>
+            <ol id="comm_list">
+
+            </ol>
+        </div>
+        <script type="text/javascript">
+            var button = document.getElementById("elem");
+            var websocket = new WebSocket("ws://127.0.0.1:5050/");
+            websocket.onopen = function() {
+                websocket.send(JSON.stringify({"product_id": {{prod.id}}, "user_id": {{current_user.id}}}));
+            };
+            button.onclick  = function() {
+                var comment = document.getElementById("comm");
+                websocket.send(JSON.stringify({"comment": comment.value}));
+                comment.value = "";
+            };
+
+            websocket.addEventListener("message", ({ data }) => {
+                var data = JSON.parse(data);
+                var comment_lst = document.getElementById("comm_list");
+                while (comment_lst.firstChild){
+                    comment_lst.removeChild(comment_lst.firstChild);
+                }
+                var li = document.createElement("li");
+                li.innerHTML = "check_connection"
+                comment_lst.appendChild(li);
+                for (var i = 0, len1 = Object.keys(data).length; i < len1; i++){
+                    for (var j = 0, len2 = Object.values(data)[i].length; j < len2; j++){
+                        var li = document.createElement("li");
+                        li.innerHTML = Object.keys(data)[i] + " : " + Object.values(data)[i][j];
+                        comment_lst.appendChild(li);
+                    }
+                }
+            });
+        </script>
+    {% endif %}
+{% endblock %}

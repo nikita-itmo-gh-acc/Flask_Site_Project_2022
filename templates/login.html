@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1 id="login">Авторизация</h1>
+<div class="stand-block1">
+    <form action="" method="POST" name="login">
+        <p>{{ form.hidden_tag() }}</p>
+        <p>Логин: {{form.email}}</p>
+        <p>Пароль: {{form.password}}</p>
+        <p>{{form.submit}}</p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% if current_user.is_authenticated %}
+        <h1> Добро пожаловать на домашнюю страницу , {{ current_user.name }}.</h1>
+    {% else %}
+        <h1> Добро пожаловать на домашнюю страницу.</h1>
+    {% endif %}
+</div>
+
+{% endblock %}
